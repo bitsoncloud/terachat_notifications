@@ -1,0 +1,133 @@
+<?php
+if(isset($_POST["cambiow"])){
+    foreach (tera_notif_stats() as $key => $estado){
+        tera_notif_update_template($key, $_POST[$key]);
+    }
+}
+?>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<style>
+    .shortcw{
+        cursor:copy;
+    }
+</style>
+
+<h2>Ajuste de Plantillas</h2>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-4 col-sm-12" style="margin-bottom: 10px;" >
+
+            <h3 class="text-muted">Detalles Generales del Pedido</h3>
+
+            <code class="shortcw">[site-url]</code>: <span class="text-muted">URL del sitio</span><br>
+            <code class="shortcw">[order-id]</code>: <span class="text-muted">ID del pedido</span><br>
+            <code class="shortcw">[order-key]</code>: <span class="text-muted">Clave de Producto</span><br>
+            <code class="shortcw">[order-number]</code>: <span class="text-muted">Número del pedido</span><br>
+            <code class="shortcw">[order-status]</code>: <span class="text-muted">Estado pedido</span><br>
+            <code class="shortcw">[order-date]</code>: <span class="text-muted">Fecha de creación del pedido</span><br>
+            <code class="shortcw">[order-total-products]</code>: <span class="text-muted">Total de productos del pedido</span><br>
+            <code class="shortcw">[order-products-names]</code>: <span class="text-muted">Nombre/s de el/los producto/s del pedido</span><br>
+            <code class="shortcw">[order-subtotal]</code>: <span class="text-muted">Subtotal del pedido</span><br>
+            <code class="shortcw">[order-discount]</code>: <span class="text-muted">Descuento total del pedido</span><br>
+            <code class="shortcw">[order-tax]</code>: <span class="text-muted">Impuesto total del pedido</span><br>
+            <code class="shortcw">[order-total]</code>: <span class="text-muted">Monto total del pedido sin decimales</span><br>
+            <code class="shortcw">[order-total-1]</code>: <span class="text-muted">Monto total del pedido 1 decimal</span><br>
+            <code class="shortcw">[order-total-2]</code>: <span class="text-muted">Monto total del pedido 2 decimales</span><br>
+            <code class="shortcw">[order-total-3]</code>: <span class="text-muted">Monto total del pedido 3 decimales</span><br>
+            <code class="shortcw">[order-total-4]</code>: <span class="text-muted">Monto total del pedido 4 decimales</span><br>
+            <code class="shortcw">[order-payment-method]</code>: <span class="text-muted">Método de pago del pedido</span><br>
+            <code class="shortcw">[order-shipping-method]</code>: <span class="text-muted">Método de envío del pedido</span><br>
+            <code class="shortcw">[order-shipping-cost]</code>: <span class="text-muted">Costo de envío del pedido</span><br>
+            <code class="shortcw">[order-total-refund]</code>: <span class="text-muted">Total reembolsado pedido</span><br>
+            <code class="shortcw">[order-customer-note]</code>: <span class="text-muted">Nota del cliente del pedido</span><br>
+            <code class="shortcw">[order-view-url]</code>: <span class="text-muted">Link para ver el pedido</span><br>
+            <code class="shortcw">[order-pay-url]</code>: <span class="text-muted">Link de pago del pedido</span><br><br>
+
+            <h3 class="text-muted">Detalles de Facturación del Pedido</h3>
+
+            <code class="shortcw">[order-billing-first-name]</code>: <span class="text-muted">Facturación: Nombre/s del cliente.</span><br>
+            <code class="shortcw">[order-billing-last-name]</code>: <span class="text-muted">Facturación: Apellido/s del cliente.</span><br>
+            <code class="shortcw">[order-billing-company]</code>: <span class="text-muted">Facturación: Empresa del cliente.</span><br>
+            <code class="shortcw">[order-billing-address-1]</code>: <span class="text-muted">Facturación: Línea 1 de dirección.</span><br>
+            <code class="shortcw">[order-billing-address-2]</code>: <span class="text-muted">Facturación: Línea 2 de dirección.</span><br>
+            <code class="shortcw">[order-billing-city]</code>: <span class="text-muted">Facturación: Ciudad.</span><br>
+            <code class="shortcw">[order-billing-post-code]</code>: <span class="text-muted">Facturación: Código Postal.</span><br>
+            <code class="shortcw">[order-billing-state]</code>: <span class="text-muted">Facturación: Estado/Provincia.</span><br>
+            <code class="shortcw">[order-billing-country]</code>: <span class="text-muted">Facturación: País.</span><br>
+            <code class="shortcw">[order-billing-email]</code>: <span class="text-muted">Facturación: Correo Electrónico.</span><br>
+            <code class="shortcw">[order-billing-phone]</code>: <span class="text-muted">Facturación: Teléfono.</span><br>
+            <code class="shortcw">[order-billing-lat]</code>: <span class="text-muted">Facturación: Latitud (Ubicación).</span><br>
+            <code class="shortcw">[order-billing-long]</code>: <span class="text-muted">Facturación: Longitud (Ubicación).</span><br><br>
+
+            <h3 class="text-muted">Detalles de Envío del Pedido</h3>
+
+            <code class="shortcw">[order-shipping-first-name]</code>: <span class="text-muted">Envío: Nombre/s del cliente.</span><br>
+            <code class="shortcw">[order-shipping-last-name]</code>: <span class="text-muted">Envío: Apellido/s del cliente.</span><br>
+            <code class="shortcw">[order-shipping-company]</code>: <span class="text-muted">Envío: Empresa del cliente.</span><br>
+            <code class="shortcw">[order-shipping-address-1]</code>: <span class="text-muted">Envío: Línea 1 de dirección.</span><br>
+            <code class="shortcw">[order-shipping-address-2]</code>: <span class="text-muted">Envío: Línea 2 de dirección.</span><br>
+            <code class="shortcw">[order-shipping-city]</code>: <span class="text-muted">Envío: Ciudad.</span><br>
+            <code class="shortcw">[order-shipping-post-code]</code>: <span class="text-muted">Envío: Código Postal.</span><br>
+            <code class="shortcw">[order-shipping-state]</code>: <span class="text-muted">Envío: Estado/Provincia.</span><br>
+            <code class="shortcw">[order-shipping-country]</code>: <span class="text-muted">Envío: País.</span><br>
+            <code class="shortcw">[order-shipping-phone]</code>: <span class="text-muted">Envío: Teléfono.</span><br>
+            <code class="shortcw">[order-shipping-lat]</code>: <span class="text-muted">Envío: Latitud (Ubicación).</span><br>
+            <code class="shortcw">[order-shipping-long]</code>: <span class="text-muted">Envío: Longitud (Ubicación).</span><br>
+
+            <?php do_action("tera_notif_add_variables_page") ?>
+        </div>
+        <div class="col-lg-8 col-sm-12">
+            <form method="POST">
+                <input type="hidden" name="cambiow" value="1">
+                <?php foreach(tera_notif_stats() as $clave => $estado) { ?>
+                    <h3><?php echo $estado ?></h3>
+                    <textarea name="<?php echo $clave ?>" id="<?php echo $clave ?>w" style="width:100%;" rows="10" class="textareaw"><?php echo get_option("tera_notif_order_".$clave) ?></textarea><br>
+                <?php } submit_button(); ?>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script>
+    let $ = jQuery;
+    let elems = 0;
+    let elims = 0;
+    let arrElems = new Array();
+    var curr_text_area = "";
+    $(".shortcw").click(function (e) { 
+        var shortc = $(this).html();
+        if(curr_text_area != "") {
+            var content = $("#"+curr_text_area).val();
+            var position = $("#"+curr_text_area).getCursorPosition();
+            var newContent = content.substr(0, position) + shortc + content.substr(position);
+            $("#"+curr_text_area).val(newContent);
+        }
+    });
+
+    $(".textareaw").click(function (e) { 
+        curr_text_area = this.id;
+    });
+
+    (function ($, undefined) {
+        $.fn.getCursorPosition = function () {
+            var el = $(this).get(0);
+            var pos = 0;
+            if ('selectionStart' in el) {
+                pos = el.selectionStart;
+            } else if ('selection' in document) {
+                el.focus();
+                var Sel = document.selection.createRange();
+                var SelLength = document.selection.createRange().text.length;
+                Sel.moveStart('character', -el.value.length);
+                pos = Sel.text.length - SelLength;
+            }
+            return pos;
+        }
+    })(jQuery);
+
+</script>
