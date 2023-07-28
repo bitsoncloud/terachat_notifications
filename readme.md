@@ -5,8 +5,7 @@ Requires at least: 4.9
 Tested up to: 5.4
 Requires PHP: 5.6
 License: GNU General Public License v3.0
-License URI: https://github.com/Preciousomonze/woocommerce-phone-validator/blob/master/LICENSE
-Donate link: https://rave.flutterwave.com/pay/preciousomonze
+License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html
 Stable tag: 1.3.0
 
 # Tera.Chat Notifications
