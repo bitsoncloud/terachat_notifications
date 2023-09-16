@@ -27,7 +27,7 @@ Asegúrate de tener instalados y activados los siguientes plugins antes de utili
 Estos plugins son necesarios para que Tera.Chat Notifications funcione correctamente, ya que utiliza sus funcionalidades para integrar las notificaciones con la plataforma externa "Tera Chat".
 
 ## Instalación Manual
-1. Descarga el archivo ZIP del plugin desde el [repositorio oficial: ](https://github.com/Preciousomonze/woocommerce-phone-validator/blob/master/LICENSE).
+1. Descarga el archivo ZIP del plugin desde el [repositorio oficial](https://github.com/bitsoncloud/terachat_notifications).
 2. Accede al panel de administración de WordPress.
 3. Ve a "Plugins" > "Añadir nuevo".
 4. Haz clic en "Subir plugin" y selecciona el archivo ZIP que descargaste.
