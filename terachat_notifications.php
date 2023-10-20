@@ -3,7 +3,7 @@
 Plugin Name: Tera chat Notificaciones
 Plugin URI: https://tera.chat
 Description: Notificaciones de pedido de Tera Chat
-Version: 1.0.0.22
+Version: 1.0.1
 Author: Bits On Cloud LLC
 Author URI: https://bitsoncloud.com
 License: GPL2
