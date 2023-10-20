@@ -210,8 +210,13 @@ function parseMSG($msg, $order_id, $user_id = ''){
     $msg = str_replace("[order-total-refund]", get_woocommerce_currency()." ".number_format($orden->get_total_refunded(),2), $msg);
     $msg = str_replace("[order-customer-note]", $orden->get_customer_note(), $msg);
     $msg = str_replace("[order-view-url]", $orden->get_view_order_url(), $msg);
-    // $msg = str_replace("[order-view-url]", get_site_url()."/finalizar-compra/pedido-recibido/".$order_id."/?key=".$orden->get_order_key() , $msg);
+    $msg = str_replace("[order-view-public-url]", $orden->get_checkout_order_received_url(), $msg);
     $msg = str_replace("[order-pay-url]", $orden->get_checkout_payment_url(), $msg);
+    
+    $checkout_url = wc_get_endpoint_url('order-pay', $order_id, get_permalink(wc_get_page_id('checkout')));
+    $complete_checkout_url = add_query_arg(array('key' => $orden->get_order_key()), $checkout_url);
+
+    echo $complete_checkout_url;
     $prodsArr = array();
     $prods = "";
     $contador = 1;
