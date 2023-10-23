@@ -212,11 +212,6 @@ function parseMSG($msg, $order_id, $user_id = ''){
     $msg = str_replace("[order-view-url]", $orden->get_view_order_url(), $msg);
     $msg = str_replace("[order-view-public-url]", $orden->get_checkout_order_received_url(), $msg);
     $msg = str_replace("[order-pay-url]", $orden->get_checkout_payment_url(), $msg);
-    
-    $checkout_url = wc_get_endpoint_url('order-pay', $order_id, get_permalink(wc_get_page_id('checkout')));
-    $complete_checkout_url = add_query_arg(array('key' => $orden->get_order_key()), $checkout_url);
-
-    echo $complete_checkout_url;
     $prodsArr = array();
     $prods = "";
     $contador = 1;
