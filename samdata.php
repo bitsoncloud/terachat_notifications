@@ -62,100 +62,18 @@ function fix_number($arrn, $numero){
     }
 }
 
-add_action( 'woocommerce_order_status_completed', 'tera_notif_order_completed', 99, 1);
-add_action( 'woocommerce_order_status_processing', 'tera_notif_order_processing', 10, 1);
-add_action( 'woocommerce_order_status_on-hold', 'tera_notif_order_hold', 10, 1);
-add_action( 'woocommerce_order_status_pending', 'tera_notif_order_pending', 10, 1);
-add_action( 'woocommerce_order_status_cancelled', 'tera_notif_order_cancelled', 10, 1);
-add_action( 'woocommerce_order_status_failed', 'tera_notif_order_failed', 10, 1);
-add_action( 'woocommerce_order_status_refunded', 'tera_notif_order_refunded', 10, 1);
-
-function tera_notif_order_completed($order_id){
+add_action('woocommerce_order_status_changed', 'tera_notif_order_changed', 10, 3);
+function tera_notif_order_changed($order_id,$old_status,$new_status){
     $orden = new WC_Order($order_id);
-    //$phone = $orden->get_billing_phone();
     $phone = $orden->get_billing_phone();
-    // var_dump($phone); exit;
+    
     $phoneFormatted = test_number($phone);
-    $msg = get_option("tera_notif_order_completed");
+    $msg = get_option("tera_notif_order_".$new_status);
     $msg = parseMSG($msg, $order_id);
-    if($msg != "") {
-        // $orden->add_order_note($msg);
-        tera_notif_text_message($phoneFormatted, $msg);
-    }
-}
-
-function tera_notif_order_processing($order_id){
-    $orden = new WC_Order($order_id);
-    //$phone = $orden->get_billing_phone();
-    $phone = $orden->get_billing_phone();
-    $phoneFormatted = test_number($phone);
-
-    $msg = get_option("tera_notif_order_processing");
-    $msg = parseMSG($msg, $order_id);
-    //if($msg != "") {
-        //if(get_post_meta($order_id, "billing_lat", true) == "") tera_notif_text_message($phoneFormatted, $msg);
-        tera_notif_text_message($phoneFormatted, $msg);
-        //else enviaMSGLocacionWH($phoneFormatted, parseMSG("[order-billing-lat]", $order_id), parseMSG("[order-billing-long]", $order_id), $msg);
-    //}
-}
-
-function tera_notif_order_hold($order_id){
-    $orden = new WC_Order($order_id);
-    //$phone = $orden->get_billing_phone();
-    $phone = $orden->get_billing_phone();
-    $phoneFormatted = test_number($phone);
-  	//var_dump($phone, $phoneFormatted);exit;
-    $msg = get_option("tera_notif_order_on-hold");
-    $msg = parseMSG($msg, $order_id);
-    if($msg != "") tera_notif_text_message($phoneFormatted, $msg);
-}
-
-function tera_notif_order_pending($order_id){
-    $orden = new WC_Order($order_id);
-    //$phone = $orden->get_billing_phone();
-    $phone = $orden->get_billing_phone();
-    $phoneFormatted = test_number($phone);
-
-    $msg = get_option("tera_notif_order_pending");
-    $msg = parseMSG($msg, $order_id);
-    if($msg != "") tera_notif_text_message($phoneFormatted, $msg);
-}
-
-function tera_notif_order_cancelled($order_id){
-    $orden = new WC_Order($order_id);
-    //$phone = $orden->get_billing_phone();
-    $phone = $orden->get_billing_phone();
-    $phoneFormatted = test_number($phone);
-
-    $msg = get_option("tera_notif_order_cancelled");
-    $msg = parseMSG($msg, $order_id);
-    if($msg != "") tera_notif_text_message($phoneFormatted, $msg);
-}
-
-function tera_notif_order_failed($order_id){
-    $orden = new WC_Order($order_id);
-    //$phone = $orden->get_billing_phone();
-    $phone = $orden->get_billing_phone();
-    $phoneFormatted = test_number($phone);
-
-    $msg = get_option("tera_notif_order_failed");
-    $msg = parseMSG($msg, $order_id);
-    if($msg != "") tera_notif_text_message($phoneFormatted, $msg);
-}
-
-function tera_notif_order_refunded($order_id){
-    $orden = new WC_Order($order_id);
-    //$phone = $orden->get_billing_phone();
-    $phone = $orden->get_billing_phone();
-    $phoneFormatted = test_number($phone);
-
-    $msg = get_option("tera_notif_order_refunded");
-    $msg = parseMSG($msg, $order_id);
-    if($msg != "") tera_notif_text_message($phoneFormatted, $msg);
+    if($msg != "")  tera_notif_text_message($phoneFormatted, $msg);
 }
 
 function tera_notif_update_template($id, $data){
-
     update_option("tera_notif_order_$id",$data);
 }
 

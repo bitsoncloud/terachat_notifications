@@ -1,5 +1,5 @@
 === Terachat Notifications ===
-Contributors: Bits On Cloud LLC
+Contributors: bitsoncloud
 Tags: woocommerce,Terachat,Tera Chat,Notifications,Notificaciones
 Requires at least: 4.9
 Tested up to: 5.4
