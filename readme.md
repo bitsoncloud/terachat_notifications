@@ -28,7 +28,7 @@ Estos plugins son necesarios para que Tera.Chat Notifications funcione correctam
 
 ## Instalación Manual
 1. Descarga el archivo ZIP del plugin desde el [repositorio oficial](https://github.com/bitsoncloud/terachat_notifications).
-2. Quítale el _main del nombre del archivo ZIP.
+2. Quítale el _main del nombre del archivo ZIP, debe quedar así: terachat-notifications.zip.
 3. Accede al panel de administración de WordPress.
 4. Ve a "Plugins" > "Añadir nuevo".
 5. Haz clic en "Subir plugin" y selecciona el archivo ZIP que descargaste.
