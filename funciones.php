@@ -270,36 +270,21 @@ function start_tera_notif_config(){
 
 function save_tera_token(){
     if(isset($_POST["tera_token"])){
-        $resp = tera_api([
-            "tera_token" => $_POST["tera_token"],
-            "function" => "test_connection"
-        ]);
-        if($resp == "false") echo "no";
-        else {
-            update_option("tera_notif_token", $_POST["tera_token"]);
-            echo "ok";
+        update_option("tera_notif_token", $_POST["tera_token"]);
+        $resp = tera_api("");
+        if($resp->code == 200) echo "ok";
+        else{
+            echo "no";
+            delete_option("tera_notif_token");
         }
     }else{
         echo "no";
+        delete_option("tera_notif_token");
     }
     die();
 }
 add_action("wp_ajax_save_tera_token", "save_tera_token");
 
-function set_instance(){
-    if(isset($_POST["instance"])){
-        update_option("tera_notif_instance", $_POST["instance"]);
-        echo "ok";
-    }else{
-        echo "no";
-    }
-    die();
-}
-add_action("wp_ajax_set_instance", "set_instance");
-
-function get_instances(){
-    $resp = tera_api([
-        "function" => "test_connection"
-    ]);
-    return json_decode($resp) ?? [];
+function getNotifInstance(){
+    return tera_api("");
 }

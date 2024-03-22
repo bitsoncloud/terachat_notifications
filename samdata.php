@@ -1,39 +1,41 @@
 <?php
 
-function tera_api($postvars, $tiempoEspera = 30){
-    if(!isset($postvars["tera_token"]))$postvars["tera_token"] = get_option("tera_notif_token");
-    $postdata = http_build_query($postvars);
-    $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, "https://tera.chat/api/");
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
-    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-    curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
-    curl_setopt($curl, CURLOPT_TIMEOUT, 10);
-    curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, $tiempoEspera);
-    curl_setopt($curl, CURLOPT_POST, true); 
-    curl_setopt($curl, CURLOPT_POSTFIELDS, $postdata);
-    $answer = curl_exec($curl);
-    return $answer;
+function tera_api($path, $method = "GET", $data = [], $params = []){
+    try{
+        $resp = wp_remote_post("https://api.tera.chat/v1/notifications".$path, [
+            "method" => $method,
+            "timeout" => 10,
+            "headers" => [
+                "Authorization" => "Bearer ".get_option("tera_notif_token". "")
+            ],
+            "body" => $data,
+            "params" => $params
+        ]);
+        if(is_a($resp, "WP_Error")) throw new Exception($resp->get_error_message(), $resp->get_error_code());
+        
+        $code = $resp["response"]["code"];
+        $body = $resp["body"];
+        if($code != "200") throw new Exception($body, $code);
+        $response = new stdClass();
+        $response->code = $code;
+        $response->data = $body;
+        return $response;
+
+        
+    }catch(Exception $e){
+        $response = new stdClass();
+        $response->code = $e->getCode();
+        $response->data = $e->getMessage();
+
+        return $response;
+    }
 }
 
 function tera_notif_text_message($contacto, $mensaje){
-    if(get_option("tera_notif_instance") != "" && get_option("tera_notif_instance") != "0"){
-        $postvar = [
-            "function" => "instance",
-            "path" => base64_encode("envio/enviaTexto"),
-            "vars" => base64_encode(json_encode([
-                "mensaje" => base64_encode($mensaje),
-                "contacto" => $contacto,
-                "dormir" => 0
-            ])),
-            "params" => base64_encode(json_encode([])),
-            "instance_id" => get_option("tera_notif_instance"),
-            "method" => CURLOPT_POST,
-            "time" => 0
-        ];
-        // var_dump($postvar);exit;
-        return tera_api($postvar);
-    } return false;
+    return tera_api("/message", "POST", [
+        "msg" => base64_encode($mensaje),
+        "contact" => $contacto
+    ]);
 }
 
 function test_number($tel){
